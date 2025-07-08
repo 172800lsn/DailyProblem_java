@@ -1,22 +1,35 @@
-# DailyProblem with java language
-## Thougth process for sovling dynamic programming problems
-### 1.Fibonacci-type problems
-The typical feature of Fibonacci-typy problems is that the status(like point) is decided by the former 2-3 statuses
-and their next action. So we can find the recursive expression first, then define the dp array, and find the side condition
-which is both difficult and falliable.
+# Daily Problem (Java)
 
-- One typical example 'Min Cost Climbing Stairs':
-```
+## Thought Process for Solving Dynamic Programming Problems
+
+### 1. Fibonacci-type Problems
+
+The hallmark of Fibonacci-type problems is that the current state (for example, a position on a staircase) depends only on the previous two – three states and their associated actions. The usual workflow is therefore:
+
+1. **Derive the recurrence relation.**
+2. **Define the DP array** (or use rolling variables to save space).
+3. **Specify the boundary conditions**, which are often the trickiest part and the main source of bugs.
+
+---
+
+#### Classic Example – *Min Cost Climbing Stairs*
+
+```java
 class Solution {
     public int minCostClimbingStairs(int[] cost) {
         int n = cost.length;
-        int[] dp = new int[n+1];
-        for(int i = 2;i <=n;i++){
-            dp[i] = Math.min(dp[i-1] + cost[i-1],dp[i-2] + cost[i-2]);
+        int[] dp = new int[n + 1];
+        for (int i = 2; i <= n; i++) {
+            dp[i] = Math.min(dp[i - 1] + cost[i - 1],
+                             dp[i - 2] + cost[i - 2]);
         }
         return dp[n];
-    }
+    }v
 }
 ```
-The time complexity is usually O(N). N is the length of array.
-While raversing an array, we decide whether each element is in our dynamic stragety.
+The time complexity is O(n), where n is the length of the array. 
+While traversing the array we decide, for each step, whether 
+the element participates in our dynamic-programming strategy.
+
+You can further reduce the space to O(1) by 
+keeping only the last two values instead of the entire dp array
